@@ -46,7 +46,7 @@ def _print(data):
 
 
 console = Console()
-sys.stdout = console # we use the write method :-)
+sys.stdout = console
 sys.stderr = console
 
 
@@ -88,10 +88,10 @@ class HandleKeyPress(OnKeyPress):
 
 onkeypress = HandleKeyPress()
 
-    
-HtmlPage.RegisterScriptableObject("onkeypress", onkeypress)    
-console.write("Python %s on %s\nPython in the Browser by Michael Foord\n" % 
-              (sys.version, sys.platform))
+HtmlPage.RegisterScriptableObject("onkeypress", onkeypress)
+
+console.write("Python %s on Silverlight\nPython in the Browser by Michael Foord\n" % 
+              (sys.version,))
 console.write(ps1)
 
 Application.Current.RootVisual = root
