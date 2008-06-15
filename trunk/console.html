@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <title>IronPython and Silverlight 2 Interactive Interpreter</title>
+		<script type="text/javascript" src="cursor_pos.js"></script>
+
+        <style type="text/css">
+          #interpreter {
+      	  font-family: monospace;
+      	  font-size: 1.25em;
+          }
+        </style>
+
+        <!-- Formatting for DLR error handling -->
+        <link type="text/css" rel="stylesheet" href="assets/stylesheets/error.css" />
+
+        <!-- 
+          Error handling for when DLR errors are disabled (with 
+          reportErrors=false, or not defined at all)
+        -->
+        <script type="text/javascript">
+          function onSilverlightError(sender, args) {
+            if (args.errorType == "InitializeError")  {
+              var errorDiv = document.getElementById("errorLocation");
+              if (errorDiv != null)
+                errorDiv.innerHTML = args.errorType + "- " + args.errorMessage;
+            }
+          }
+        </script>
+
+	<script type="text/javascript">
+
+		function KeyPress(e){
+			control = document.getElementById('SilverlightControl');
+			field = document.getElementById('interpreter');
+			element = document.getElementById('debugging');
+			element2 = document.getElementById('debugging2');
+			start = getSelectionStart(field);
+			end = getSelectionEnd(field);
+						
+			if(window.event) {// IE
+				keynum = e.keyCode;
+			}
+			else if(e.which) { // Netscape/Firefox/Opera
+				keynum = e.which;
+			}
+			else {
+				return true;
+			}
+			
+			if ((keynum >= 37) && (keynum < 41)) {
+				return true;
+			}
+			
+			keychar = String.fromCharCode(keynum);
+			element2.innerHTML = 'KeyNum: ' + keynum + ' KeyChar: ' + keychar;
+			retVal = control.Content.onkeypress.method(start, end, keychar);
+			element.innerHTML = element.innerHTML + ' Result: ' + retVal;
+			if (retVal == 'true') {
+				return true;
+			} else {
+				return false;
+			}
+		}
+    </script>
+    </head>
+    
+    <body>
+        <h1>IronPython and Silverlight 2 Interactive Interpreter</h1>
+    	<p>Part of the <a href="http://www.voidspace.org.uk/ironpython/silverlight/">Voidspace IronPython and Silverlight Tutorials</a>.</p>
+
+    	<textarea id="interpreter" onkeydown="return KeyPress(event);" cols="80" rows="25"></textarea>
+    	<div id="debugging">Start..</div>
+    	<div id="debugging2">Start2..</div>
+
+        <!-- 
+          Syntax/Runtime errors from Silverlight will be displayed here.
+          This will contain debugging information and should be removed 
+          or hidden when debugging is completed 
+        -->
+        <div id='errorLocation' style="font-size: small;color: Gray;"></div>
+
+        <div id="SilverlightControlHost" width="320" height="240">
+
+          <object id="SilverlightControl" data="data:application/x-silverlight," type="application/x-silverlight-2-b2" width="480" height="320">
+            <param name="source" value="app.xap"/>
+            <param name="onerror" value="onSilverlightError" />
+            <param name="background" value="#00000000" />
+            <param name="initParams" value="reportErrors=errorLocation" />
+            <param name="windowless" value="true" />
+
+            <a href="http://go.microsoft.com/fwlink/?LinkID=108182" style="text-decoration: none;">
+                <img src="http://go.microsoft.com/fwlink/?LinkId=108181" alt="Get Microsoft Silverlight" style="border-style: none"/>
+            </a>
+          </object>
+          <iframe style='visibility:hidden;height:0;width:0;border:0px'></iframe>
+
+        </div>
+        
+        
+    </body>
+</html>
