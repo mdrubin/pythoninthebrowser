@@ -1,9 +1,8 @@
 <html>
     <head>
-        <title>IronPython and Silverlight 2 Interactive Interpreter</title>
-		<script type="text/javascript" src="cursor_pos.js"></script>
-
+        <title>Python in the Browser: an IronPython and Silverlight 2 Interactive Interpreter</title>
         <style type="text/css">
+          body { font-size: 1.25em; }
           #interpreter {
       	  font-family: monospace;
       	  font-size: 1.25em;
@@ -12,61 +11,20 @@
 
         <!-- Formatting for DLR error handling -->
         <link type="text/css" rel="stylesheet" href="assets/stylesheets/error.css" />
+        <!-- Defines "onSilverlightError" function for Silverlight plugin -->
+        <script type="text/javascript" src="assets/javascript/error.js"></script>
+		<script type="text/javascript" src="assets/javascript/cursor_pos.js"></script>
+        <script type="text/javascript" src="assets/javascript/onkeypress.js"></script>
 
-        <!-- 
-          Error handling for when DLR errors are disabled (with 
-          reportErrors=false, or not defined at all)
-        -->
-        <script type="text/javascript">
-          function onSilverlightError(sender, args) {
-            if (args.errorType == "InitializeError")  {
-              var errorDiv = document.getElementById("errorLocation");
-              if (errorDiv != null)
-                errorDiv.innerHTML = args.errorType + "- " + args.errorMessage;
-            }
-          }
-        </script>
-
-	<script type="text/javascript">
-
-		function KeyPress(e){
-			control = document.getElementById('SilverlightControl');
-			field = document.getElementById('interpreter');
-			element = document.getElementById('debugging');
-			element2 = document.getElementById('debugging2');
-			start = getSelectionStart(field);
-			end = getSelectionEnd(field);
-						
-			if(window.event) {// IE
-				keynum = e.keyCode;
-			}
-			else if(e.which) { // Netscape/Firefox/Opera
-				keynum = e.which;
-			}
-			else {
-				return true;
-			}
-			
-			if ((keynum >= 37) && (keynum < 41)) {
-				return true;
-			}
-			
-			keychar = String.fromCharCode(keynum);
-			element2.innerHTML = 'KeyNum: ' + keynum + ' KeyChar: ' + keychar;
-			retVal = control.Content.onkeypress.method(start, end, keychar);
-			element.innerHTML = element.innerHTML + ' Result: ' + retVal;
-			if (retVal == 'true') {
-				return true;
-			} else {
-				return false;
-			}
-		}
-    </script>
     </head>
     
     <body>
-        <h1>IronPython and Silverlight 2 Interactive Interpreter</h1>
-    	<p>Part of the <a href="http://www.voidspace.org.uk/ironpython/silverlight/">Voidspace IronPython and Silverlight Tutorials</a>.</p>
+        <h1>Python in the Browser: an IronPython and Silverlight 2 Interactive Interpreter</h1>
+    	<ul>
+    	    <li><a href="http://code.google.com/p/pythoninthebrowser/">Python in the Browser Project Page</a></li>
+    	    <li>Written by <a href="http://www.voidspace.org.uk/python/weblog/index.shtml">Michael Foord</a></li>
+    	    <li><a href="http://www.ironpythoninaction.com/">IronPython in Action</a></li>
+    	</ul>
 
     	<textarea id="interpreter" onkeydown="return KeyPress(event);" cols="80" rows="25"></textarea>
     	<div id="debugging">Start..</div>
@@ -79,9 +37,9 @@
         -->
         <div id='errorLocation' style="font-size: small;color: Gray;"></div>
 
-        <div id="SilverlightControlHost" width="320" height="240">
+        <div id="SilverlightControlHost" width="200" height="240">
 
-          <object id="SilverlightControl" data="data:application/x-silverlight," type="application/x-silverlight-2-b2" width="480" height="320">
+          <object id="SilverlightControl" data="data:application/x-silverlight," type="application/x-silverlight-2-b2" width="200" height="200">
             <param name="source" value="app.xap"/>
             <param name="onerror" value="onSilverlightError" />
             <param name="background" value="white" />
@@ -96,7 +54,23 @@
           <iframe style='visibility:hidden;height:0;width:0;border:0px'></iframe>
 
         </div>
-        
-        
+
+        <div id="introduction">
+            <p>An interactive <a href="http://www.python.org/">Python</a> interpreter that runs in the browser, using <a href="http://silverlight.net/GetStarted/">Silverlight 2</a> and <a href="http://www.codeplex.com/IronPython">IronPython</a>.</p>
+
+            <p>This is ideal for tutorials and documentation, where example Python code can actually be tried in the browser.</p>
+
+            <p>It requires Silverlight 2 Beta 2, and the Python version is 2.5.</p>
+
+            <p>The interpreter runs in an HTML textarea, with Javascript that communicates with Silverlight and prevents you deleting text from the console except after the interactive prompt.</p>
+
+            <p>Target browsers are Firefox 2 & 3, Safari and IE 7 & 8. (It won't work in other browsers until there is a version of Silverlight that works with them.)</p>
+
+            <p>Currently it 'works' but is at an early stage of development.</p>
+
+            <p>The project is a combination of IronPython? (for the interpreter loop), Javascript (for the 'console behaviour' in the textarea) and C# (as a helper to call into Silverlight from Javascript). On every keypress Javascript calls into IronPython? (via the C#!). If the keypress is an 'enter', then it pushes the current line into the interpreter loop (which uses the standard library <a href="http://docs.python.org/lib/module-code.html">code module</a>). Stdout is diverted to print into the textarea, where tracebacks are also sent. If you are attempting to type over, or delete, previous output then the keypress is cancelled.</p>
+
+            <p>Silverlight 2 is currently only available for Windows and Mac OS X, with the Firefox, Safari or IE browsers. Linux support is in the works via the <a href="http://www.mono-project.com/Moonlight">Moonlight project</a> from Mono.</p>
+
     </body>
 </html>
