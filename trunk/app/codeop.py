@@ -65,6 +65,7 @@ __all__ = ["compile_command", "Compile", "CommandCompiler"]
 
 PyCF_DONT_IMPLY_DEDENT = 0x200          # Matches pythonrun.h
 
+
 def _maybe_compile(compiler, source, filename, symbol):
     # Check for source consisting of only blank lines and comments
     for line in source.split("\n"):
@@ -82,23 +83,23 @@ def _maybe_compile(compiler, source, filename, symbol):
         code = compiler(source, filename, symbol)
     except SyntaxError, err:
         pass
-        
-        try:
-            code1 = compiler(source + "\n", filename, symbol)
-        except SyntaxError, err1:
-            #print 'Raised (2)', err1
-            pass
-            #print 'Executing (3)', repr(source + '\n\n')
-            try:
-                code2 = compiler(source + "\n\n", filename, symbol)
-            except SyntaxError, err2:
-                pass
-
-    if code:
+    else:
         return code
-    return None
+
+    try:
+        code1 = compiler(source + "\n", filename, symbol)
+    except SyntaxError, err1:
+        pass
+
+    try:
+        code2 = compiler(source + "\n\n", filename, symbol)
+    except SyntaxError, err2:
+        pass
+
     if not code1 and repr(err1) == repr(err2):
         raise SyntaxError, err1
+
+
 
 def _compile(source, filename, symbol):
     return compile(source, filename, symbol, PyCF_DONT_IMPLY_DEDENT)
