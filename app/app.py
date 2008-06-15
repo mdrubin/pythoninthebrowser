@@ -16,18 +16,39 @@ from System.Windows.Controls import Canvas
 from code import InteractiveConsole
 
 
+root = Canvas()
+
 ps1 = '>>> '
 ps2 = '... '
+
+# nicely format unhandled exceptions
+def excepthook(sender, e):
+    print Application.Current.Environment.GetEngine('py').FormatException(e.ExceptionObject)
+
+Application.Current.UnhandledException += excepthook
+
+# Handle infinite recursion gracefully
+sys.setrecursionlimit(1000)
 
 
 class Console(InteractiveConsole):
     def write(self, data):
-        HtmlPage.Document.interpreter.value += data
+        # Invoke it so that we can print 'safely' from another thread
+        # It also makes print asynchronous!
+        global newline_terminated
+        newline_terminated = data.endswith('\n')
+        root.Dispatcher.BeginInvoke(lambda: _print(data))
+
+newline_terminated = True
+
+def _print(data):
+    HtmlPage.Document.interpreter.value += data
 
 
 console = Console()
 sys.stdout = console # we use the write method :-)
 sys.stderr = console
+
 
 class HandleKeyPress(OnKeyPress):
     
@@ -58,8 +79,10 @@ class HandleKeyPress(OnKeyPress):
             prompt = ps2
         else:
             prompt = ps1
+            if not newline_terminated:
+                console.write('\n')
 
-        HtmlPage.Document.interpreter.value += prompt
+        root.Dispatcher.BeginInvoke(lambda: _print(prompt))
         return 'false'
         
 
@@ -67,9 +90,8 @@ onkeypress = HandleKeyPress()
 
     
 HtmlPage.RegisterScriptableObject("onkeypress", onkeypress)    
-console.write("Python %s on %s\nThe interactive browser interpreter by Michael Foord\n" % 
+console.write("Python %s on %s\nPython in the Browser by Michael Foord\n" % 
               (sys.version, sys.platform))
 console.write(ps1)
 
-root = Canvas()
 Application.Current.RootVisual = root
