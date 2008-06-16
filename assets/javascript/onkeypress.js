@@ -3,8 +3,9 @@ function KeyPress(e){
 	field = document.getElementById('interpreter');
 	element = document.getElementById('debugging');
 	element2 = document.getElementById('debugging2');
-	start = getSelectionStart(field);
-	end = getSelectionEnd(field);
+	sel = getSelection(field);
+	start = sel.start;
+	end = sel.end;
 				
 	if(window.event) {// IE
 		keynum = e.keyCode;
