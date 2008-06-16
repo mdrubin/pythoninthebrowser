@@ -90,6 +90,9 @@ onkeypress = HandleKeyPress()
 
 HtmlPage.RegisterScriptableObject("onkeypress", onkeypress)
 
+# Clear console area
+HtmlPage.Document.interpreter.value = ''
+
 console.write("Python %s on Silverlight\nPython in the Browser by Michael Foord\n" % 
               (sys.version,))
 console.write(ps1)
