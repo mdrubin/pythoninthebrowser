@@ -59,9 +59,6 @@ class HandleKeyPress(OnKeyPress):
     def _method(self, start, end, key):
         contents = HtmlPage.Document.interpreter.value or ''
         pos = contents.rfind('\n') + 5
-        mod = contents[:pos].count('\r\n') # the Javascript cursor code counts newlines as single characters for IE
-        start += mod
-        end += mod
         
         HtmlPage.Document.debugging.innerHTML = 'Start: ' + str(start) + ' End: ' + str(end) + ' Pos: ' + str(pos) + '<p>'
         if (start < pos) or (end < pos):
