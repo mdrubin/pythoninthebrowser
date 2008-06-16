@@ -6,6 +6,7 @@
           #interpreter {
       	  font-family: monospace;
       	  font-size: 1.25em;
+      	  overflow-y: scroll;
           }
         </style>
 
@@ -15,7 +16,9 @@
         <script type="text/javascript" src="assets/javascript/error.js"></script>
 		<script type="text/javascript" src="assets/javascript/cursor_pos.js"></script>
         <script type="text/javascript" src="assets/javascript/onkeypress.js"></script>
-
+        <script type="text/javascript">
+        
+        </script>
     </head>
 
     <body>
@@ -26,10 +29,12 @@
     	    <li><a href="http://www.ironpythoninaction.com/">IronPython in Action</a></li>
     	</ul>
 
-    	<textarea id="interpreter" onkeydown="return KeyPress(event);" cols="80" rows="25"></textarea>
-    	<div id="debugging">Start..</div>
-    	<div id="debugging2">Start2..</div>
-
+        <div style="margin: 20px;">
+        	<textarea id="interpreter" onkeydown="return KeyPress(event);" cols="80" rows="25" 
+        	 oncontextmenu="return false;"></textarea>
+        	<div id="debugging">Start..</div>
+        	<div id="debugging2">Start2..</div>
+        </div>
         <!--
           Syntax/Runtime errors from Silverlight will be displayed here.
           This will contain debugging information and should be removed

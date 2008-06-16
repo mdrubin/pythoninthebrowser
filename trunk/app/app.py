@@ -8,7 +8,6 @@ clr.AddReference("OnKeyPress, Version=0.0.0.0, Culture=neutral, PublicKeyToken=n
 
 from OnKeyPress import OnKeyPress
 
-from System import EventHandler
 from System.Windows import Application
 from System.Windows.Browser import HtmlPage
 from System.Windows.Controls import Canvas
@@ -43,6 +42,9 @@ newline_terminated = True
 
 def _print(data):
     HtmlPage.Document.interpreter.value += data
+    height = HtmlPage.Document.interpreter.GetProperty('scrollHeight')
+    if height:
+        HtmlPage.Document.interpreter.SetProperty('scrollTop', height)
 
 
 console = Console()
