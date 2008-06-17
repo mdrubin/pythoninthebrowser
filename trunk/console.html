@@ -4,8 +4,8 @@
         <style type="text/css">
           body { font-size: 1.25em; }
           #interpreter {
-      	  font-family: monospace;
-      	  font-size: 1.25em;
+          font-family: monospace;
+          font-size: 1.25em;
           }
         </style>
 
@@ -19,17 +19,17 @@
 
     <body>
         <h1>Python in the Browser: an IronPython and Silverlight 2 Interactive Interpreter</h1>
-    	<ul>
-    	    <li><a href="http://code.google.com/p/pythoninthebrowser/">Python in the Browser Project Page</a></li>
-    	    <li>Written by <a href="http://www.voidspace.org.uk/python/weblog/index.shtml">Michael Foord</a></li>
-    	    <li><a href="http://www.ironpythoninaction.com/">IronPython in Action</a></li>
-    	</ul>
+      <ul>
+          <li><a href="http://code.google.com/p/pythoninthebrowser/">Python in the Browser Project Page</a></li>
+          <li>Written by <a href="http://www.voidspace.org.uk/python/weblog/index.shtml">Michael Foord</a></li>
+          <li><a href="http://www.ironpythoninaction.com/">IronPython in Action</a></li>
+      </ul>
 
         <div style="margin: 20px;">
-        	<textarea id="interpreter" onkeydown="return KeyPress(event);" cols="80" rows="25" 
-        	 oncontextmenu="return false;"></textarea>
-        	<div id="debugging">Start..</div>
-        	<div id="debugging2">Start2..</div>
+          <textarea id="interpreter" onkeydown="return KeyPress(event);" cols="80" rows="25" 
+           oncontextmenu="return false;" disabled="true">Python in the browser starting...</textarea>
+          <div id="debugging">Start..</div>
+          <div id="debugging2">Start2..</div>
         </div>
         <!--
           Syntax/Runtime errors from Silverlight will be displayed here.
