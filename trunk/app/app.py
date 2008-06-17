@@ -131,7 +131,8 @@ Application.Current.RootVisual = root
 # Setup examples
 from System import EventHandler
 
-code1 = """>>> dictionary = {"Key 1":"value 1", "key 2":"value 2", "key 3":"value 3", "key 4":"value 4"} 
+code1 = """>>> 
+>>> dictionary = {"Key 1":"value 1", "key 2":"value 2", "key 3":"value 3", "key 4":"value 4"} 
 >>> """
 code1_html = """<pre style='color:#000000;background:#ffffff;'>dictionary <span style='color:#808030; '>=</span> <span style='color:#800080; '>{</span><span style='color:#0000e6; '>"Key 1"</span><span style='color:#808030; '>:</span><span style='color:#0000e6; '>"value 1"</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>"key 2"</span><span style='color:#808030; '>:</span><span style='color:#0000e6; '>"value 2"</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>"key 3"</span><span style='color:#808030; '>:</span><span style='color:#0000e6; '>"value 3"</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>"key 4"</span><span style='color:#808030; '>:</span><span style='color:#0000e6; '>"value 4"</span><span style='color:#800080; '>}</span> 
 
@@ -141,7 +142,8 @@ code1_html = """<pre style='color:#000000;background:#ffffff;'>dictionary <span 
 <span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#808030; '>[</span><span style='color:#0000e6; '>"%s=%s"</span> <span style='color:#808030; '>%</span> <span style='color:#808030; '>(</span>k<span style='color:#808030; '>,</span> v<span style='color:#808030; '>)</span> <span style='color:#800000; font-weight:bold; '>for</span> k<span style='color:#808030; '>,</span> v <span style='color:#800000; font-weight:bold; '>in</span> dictionary<span style='color:#808030; '>.</span>items<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>]</span>
 </pre>"""
 
-code2 = """>>> def make_adder(first):
+code2 = """>>> 
+>>> def make_adder(first):
 ...     def adder(second):
 ...         return first + second
 ...      return adder
@@ -193,7 +195,7 @@ def example2(*_):
     HtmlPage.Document.example_output.innerHTML = '<p>Type the following:</p>' + code2_html
     
 # Setup examples
-if hasattr(HtmlPage.Document, 'example'):
+if hasattr(HtmlPage.Document, 'examples'):
     HtmlPage.Document.restore.AttachEvent('onclick', EventHandler(restore))
     HtmlPage.Document.example1.AttachEvent('onclick', EventHandler(example1))
     HtmlPage.Document.example2.AttachEvent('onclick', EventHandler(example2))
