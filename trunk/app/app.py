@@ -154,7 +154,6 @@ code2_html = """<pre style='color:#000000;background:#ffffff;'><span style='colo
     <span style='color:#800000; font-weight:bold; '>return</span> adder
 
 add2 <span style='color:#808030; '>=</span> make_adder<span style='color:#808030; '>(</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>)</span>
-
 <span style='color:#e34adc; '>type</span><span style='color:#808030; '>(</span>add2<span style='color:#808030; '>)</span>
 add2<span style='color:#808030; '>(</span><span style='color:#008c00; '>3</span><span style='color:#808030; '>)</span>
 </pre>"""
