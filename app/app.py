@@ -8,6 +8,7 @@ clr.AddReference("OnKeyPress, Version=0.0.0.0, Culture=neutral, PublicKeyToken=n
 
 from OnKeyPress import OnKeyPress
 
+from System import Uri
 from System.Windows import Application
 from System.Windows.Browser import HtmlPage
 from System.Windows.Controls import Canvas
@@ -17,7 +18,8 @@ from code import InteractiveConsole
 __version__ = '0.1.0'
 doc = "Python in the browser: version %s" % __version__
 banner = ("Python %s on Silverlight\nPython in the Browser %s by Michael Foord\n" 
-          "Type reset() to clear the console.\n" % (sys.version, __version__))
+          "Type reset() to clear the console and gohome() to exit.\n" % (sys.version, __version__))
+home = 'http://code.google.com/p/pythoninthebrowser/'
 
 ps1 = '>>> '
 ps2 = '... '
@@ -31,7 +33,8 @@ def excepthook(sender, e):
 Application.Current.UnhandledException += excepthook
 
 # Handle infinite recursion gracefully
-sys.setrecursionlimit(1000)
+# CPython default is 1000 - but Firefox can't handle that deep
+sys.setrecursionlimit(500)
 
 
 class Console(InteractiveConsole):
@@ -58,6 +61,9 @@ class HandleKeyPress(OnKeyPress):
     def _method(self, start, end, key):
         contents = HtmlPage.Document.interpreter.value or ''
         pos = contents.rfind('\n') + 5
+        if pos > len(contents):
+            # Input is screwed - this fixes it
+            pos = len(contents)
         
         #HtmlPage.Document.debugging.innerHTML = 'Start: ' + str(start) + ' End: ' + str(end) + ' Pos: ' + str(pos) + '<p>'
         if (start < pos) or (end < pos):
@@ -100,11 +106,16 @@ def reset():
     root.Dispatcher.BeginInvoke(SetBanner)
 
 
+def gohome():
+    HtmlPage.Window.Navigate(Uri(home))
+
+
 context = {
     "__name__": "__console__", 
     "__doc__": doc,
     "__version__": __version__,
-    "reset": reset
+    "reset": reset,
+    "gohome": gohome
 }
 
 reset()
