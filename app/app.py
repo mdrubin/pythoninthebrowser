@@ -14,11 +14,15 @@ from System.Windows.Controls import Canvas
 
 from code import InteractiveConsole
 
-
-root = Canvas()
+__version__ = '0.1.0'
+doc = "Python in the browser: version %s" % __version__
+banner = ("Python %s on Silverlight\nPython in the Browser %s by Michael Foord\n" 
+          "Type reset() to clear the console.\n" % (sys.version, __version__))
 
 ps1 = '>>> '
 ps2 = '... '
+root = Canvas()
+
 
 # nicely format unhandled exceptions
 def excepthook(sender, e):
@@ -47,11 +51,6 @@ def _print(data):
         HtmlPage.Document.interpreter.SetProperty('scrollTop', height)
 
 
-console = Console()
-sys.stdout = console
-sys.stderr = console
-
-
 class HandleKeyPress(OnKeyPress):
     
     more = False
@@ -71,6 +70,7 @@ class HandleKeyPress(OnKeyPress):
         
         HtmlPage.Document.debugging.innerHTML += ' Enter... '
         line = contents[pos:]
+        
         console.write('\n')
         self.more = console.push(line)
 
@@ -83,17 +83,36 @@ class HandleKeyPress(OnKeyPress):
 
         root.Dispatcher.BeginInvoke(lambda: _print(prompt))
         return 'false'
-        
+
 
 onkeypress = HandleKeyPress()
 
 HtmlPage.RegisterScriptableObject("onkeypress", onkeypress)
 
-# Clear console area
-HtmlPage.Document.interpreter.value = ''
 
-console.write("Python %s on Silverlight\nPython in the Browser by Michael Foord\n" % 
-              (sys.version,))
+console = None
+def reset():
+    global console, newline_terminated
+    console = Console(context.copy())
+    def SetBanner():
+        HtmlPage.Document.interpreter.value = banner
+                  
+    newline_terminated = True
+    root.Dispatcher.BeginInvoke(SetBanner)
+
+
+context = {
+    "__name__": "__console__", 
+    "__doc__": doc,
+    "__version__": __version__,
+    "reset": reset
+}
+
+reset()
+sys.stdout = console
+sys.stderr = console
 console.write(ps1)
+
+HtmlPage.Document.interpreter.SetProperty('disabled', False)
 
 Application.Current.RootVisual = root
