@@ -17,6 +17,5 @@ function getSelection(field) {
 		re.moveToBookmark(r.getBookmark());
 		rc.setEndPoint('EndToStart', re);
 		
-		return { start: rc.text.length, end: rc.text.length + r.text.length };
-		
+		return { start: rc.text.length, end: rc.text.length + r.text.length }
 };

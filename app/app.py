@@ -59,16 +59,16 @@ class HandleKeyPress(OnKeyPress):
         contents = HtmlPage.Document.interpreter.value or ''
         pos = contents.rfind('\n') + 5
         
-        HtmlPage.Document.debugging.innerHTML = 'Start: ' + str(start) + ' End: ' + str(end) + ' Pos: ' + str(pos) + '<p>'
+        #HtmlPage.Document.debugging.innerHTML = 'Start: ' + str(start) + ' End: ' + str(end) + ' Pos: ' + str(pos) + '<p>'
         if (start < pos) or (end < pos):
-            HtmlPage.Document.debugging.innerHTML += '<br /> Key=%s Ord=%s' % (key, ord(key))
+            #HtmlPage.Document.debugging.innerHTML += '<br /> Key=%s Ord=%s' % (key, ord(key))
             return 'false'
         if ord(key) == 8 and end <= pos:
             return 'false'
         if key not in '\r\n': # IE sends \r - go figure...
             return 'true'
         
-        HtmlPage.Document.debugging.innerHTML += ' Enter... '
+        #HtmlPage.Document.debugging.innerHTML += ' Enter... '
         line = contents[pos:]
         
         console.write('\n')
@@ -114,5 +114,5 @@ sys.stderr = console
 console.write(ps1)
 
 HtmlPage.Document.interpreter.SetProperty('disabled', False)
-
+HtmlPage.Document.SilverlightControlHost.SetStyleAttribute('visible', 'false')
 Application.Current.RootVisual = root
