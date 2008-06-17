@@ -127,3 +127,74 @@ console.write(ps1)
 HtmlPage.Document.interpreter.SetProperty('disabled', False)
 HtmlPage.Document.SilverlightControlHost.SetStyleAttribute('visible', 'false')
 Application.Current.RootVisual = root
+
+# Setup examples
+from System import EventHandler
+
+code1 = """>>> dictionary = {"Key 1":"value 1", "key 2":"value 2", "key 3":"value 3", "key 4":"value 4"} 
+>>> """
+code1_html = """<pre style='color:#000000;background:#ffffff;'>dictionary <span style='color:#808030; '>=</span> <span style='color:#800080; '>{</span><span style='color:#0000e6; '>"Key 1"</span><span style='color:#808030; '>:</span><span style='color:#0000e6; '>"value 1"</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>"key 2"</span><span style='color:#808030; '>:</span><span style='color:#0000e6; '>"value 2"</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>"key 3"</span><span style='color:#808030; '>:</span><span style='color:#0000e6; '>"value 3"</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>"key 4"</span><span style='color:#808030; '>:</span><span style='color:#0000e6; '>"value 4"</span><span style='color:#800080; '>}</span> 
+
+<span style='color:#800000; font-weight:bold; '>print</span> dictionary<span style='color:#808030; '>.</span>items<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+<span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#808030; '>[</span>k <span style='color:#800000; font-weight:bold; '>for</span> k<span style='color:#808030; '>,</span> v <span style='color:#800000; font-weight:bold; '>in</span> dictionary<span style='color:#808030; '>.</span>items<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>]</span>
+<span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#808030; '>[</span>v <span style='color:#800000; font-weight:bold; '>for</span> k<span style='color:#808030; '>,</span> v <span style='color:#800000; font-weight:bold; '>in</span> dictionary<span style='color:#808030; '>.</span>items<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>]</span> 
+<span style='color:#800000; font-weight:bold; '>print</span> <span style='color:#808030; '>[</span><span style='color:#0000e6; '>"%s=%s"</span> <span style='color:#808030; '>%</span> <span style='color:#808030; '>(</span>k<span style='color:#808030; '>,</span> v<span style='color:#808030; '>)</span> <span style='color:#800000; font-weight:bold; '>for</span> k<span style='color:#808030; '>,</span> v <span style='color:#800000; font-weight:bold; '>in</span> dictionary<span style='color:#808030; '>.</span>items<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>]</span>
+</pre>"""
+
+code2 = """>>> def make_adder(first):
+...     def adder(second):
+...         return first + second
+...      return adder
+... 
+>>> """
+
+code2_html = """<pre style='color:#000000;background:#ffffff;'><span style='color:#800000; font-weight:bold; '>def</span> make_adder<span style='color:#808030; '>(</span>first<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+    <span style='color:#800000; font-weight:bold; '>def</span> adder<span style='color:#808030; '>(</span>second<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span><span style='color:#808030; '>:</span>
+        <span style='color:#800000; font-weight:bold; '>return</span> first <span style='color:#808030; '>+</span> second
+    <span style='color:#800000; font-weight:bold; '>return</span> adder
+
+add2 <span style='color:#808030; '>=</span> make_adder<span style='color:#808030; '>(</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>)</span>
+
+<span style='color:#e34adc; '>type</span><span style='color:#808030; '>(</span>add2<span style='color:#808030; '>)</span>
+add2<span style='color:#808030; '>(</span><span style='color:#008c00; '>3</span><span style='color:#808030; '>)</span>
+</pre>"""
+
+def restore(*_):
+    reset()
+    console.write(ps1)
+    HtmlPage.Document.example_output.SetStyleAttribute('visible', 'false')
+    HtmlPage.Document.example_output.innerHTML = ''
+
+def example1(*_):
+    global console
+    new_locals = context.copy()
+    dictionary = {"Key 1":"value 1", "key 2":"value 2", "key 3":"value 3", "key 4":"value 4"} 
+    new_locals['dictionary'] = dictionary
+    console = Console(new_locals)
+    
+    HtmlPage.Document.interpreter.value = banner + code1
+    HtmlPage.Document.example_output.SetStyleAttribute('visible', 'true')
+    HtmlPage.Document.example_output.innerHTML = '<p>Type the following:</p>' + code1_html
+                  
+
+def example2(*_):
+    global console
+    new_locals = context.copy()
+    
+    def make_adder(first):
+        def adder(second):
+            return first + second
+        return adder
+        
+    new_locals['make_adder'] = make_adder
+    console = Console(new_locals)
+    
+    HtmlPage.Document.interpreter.value = banner + code2
+    HtmlPage.Document.example_output.SetStyleAttribute('visible', 'true')
+    HtmlPage.Document.example_output.innerHTML = '<p>Type the following:</p>' + code2_html
+    
+# Setup examples
+if hasattr(HtmlPage.Document, 'example'):
+    HtmlPage.Document.restore.AttachEvent('onclick', EventHandler(restore))
+    HtmlPage.Document.example1.AttachEvent('onclick', EventHandler(example1))
+    HtmlPage.Document.example2.AttachEvent('onclick', EventHandler(example2))
