@@ -92,12 +92,11 @@ HtmlPage.RegisterScriptableObject("onkeypress", onkeypress)
 
 console = None
 def reset():
-    global console, newline_terminated
+    global console
     console = Console(context.copy())
     def SetBanner():
         HtmlPage.Document.interpreter.value = banner
                   
-    newline_terminated = True
     root.Dispatcher.BeginInvoke(SetBanner)
 
 
