@@ -2,12 +2,12 @@
     <head>
         <title>Python in the Browser: an IronPython and Silverlight 2 Interactive Interpreter</title>
         <style type="text/css">
-          body { font-size: 1em; }
+          body { font-size: 1.25em; font-family: verdana;}
           #interpreterhost {
             font-family: monospace;
           }
           #interpreter {
-            font-size: 0.75em;
+            font-size: 1em;
           }
         </style>
 
@@ -30,9 +30,9 @@
         <div id="interpreterhost" style="margin: 20px;">
           <textarea id="interpreter" onkeydown="return KeyPress(event);" cols="60" rows="15" 
            oncontextmenu="return false;" disabled="true">Python in the browser starting...</textarea>
+          
           <!--
-          <div id="debugging">Start..</div>
-          <div id="debugging2">Start2..</div>
+          <div><span id="debugging">&nbsp;</span>&nbsp;<span id="debugging2">&nbsp;</span>&nbsp;<span id="debugging3">&nbsp;</span></div>
           -->
         </div>
         <!--
