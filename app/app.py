@@ -108,6 +108,7 @@ def reset():
 
 def gohome():
     HtmlPage.Window.Navigate(Uri(home))
+    return 'Leaving...'
 
 
 context = {
