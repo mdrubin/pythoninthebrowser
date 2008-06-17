@@ -9,7 +9,7 @@ function KeyPress(e){
 				
 	if(window.event) {// IE
 		keynum = e.keyCode;
-		ctrl = e.ctrlKey;
+		ctrl = e.ctrlKey || e.metaKey;
 	}
 	else if(e.which) { // Netscape/Firefox/Opera
 		keynum = e.which;
@@ -21,7 +21,7 @@ function KeyPress(e){
 	}
 	
 	// document.getElementById('debugging').innerHTML = keynum
-	// document.getElementById('debugging2').innerHTML = ctrl
+	// document.getElementById('debugging2').innerHTML = ctrl;
 	// document.getElementById('debugging3').innerHTML = String.fromCharCode(keynum);
 	
 	if ((keynum >= 33) && (keynum < 41)) {
