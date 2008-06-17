@@ -73,7 +73,7 @@
 
             <p>Currently it 'works' but is at an early stage of development.</p>
 
-            <p>The project is a combination of IronPython (for the interpreter loop), Javascript (for the 'console behaviour' in the textarea) and C# (as a helper to call into Silverlight from Javascript). On every keypress Javascript calls into IronPython? (via the C#!). If the keypress is an 'enter', then it pushes the current line into the interpreter loop (which uses the standard library <a href="http://docs.python.org/lib/module-code.html">code module</a>). Stdout is diverted to print into the textarea, where tracebacks are also sent. If you are attempting to type over, or delete, previous output then the keypress is cancelled.</p>
+            <p>The project is a combination of IronPython (for the interpreter loop), Javascript (for the 'console behaviour' in the textarea) and C# (as a helper to call into Silverlight from Javascript). On every keypress Javascript calls into IronPython (via the C#!). If the keypress is an 'enter', then it pushes the current line into the interpreter loop (which uses the standard library <a href="http://docs.python.org/lib/module-code.html">code module</a>). Stdout is diverted to print into the textarea, where tracebacks are also sent. If you are attempting to type over, or delete, previous output then the keypress is cancelled.</p>
 
             <p>Silverlight 2 is currently only available for Windows and Mac OS X, with the Firefox, Safari or IE browsers. Linux support is in the works via the <a href="http://www.mono-project.com/Moonlight">Moonlight project</a> from Mono.</p>
 
