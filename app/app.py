@@ -199,3 +199,4 @@ if hasattr(HtmlPage.Document, 'examples'):
     HtmlPage.Document.restore.AttachEvent('onclick', EventHandler(restore))
     HtmlPage.Document.example1.AttachEvent('onclick', EventHandler(example1))
     HtmlPage.Document.example2.AttachEvent('onclick', EventHandler(example2))
+    
