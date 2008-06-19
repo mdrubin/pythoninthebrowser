@@ -1,0 +1,13 @@
+
+Deploying "Python in the Browser" is straightforward. The interpreter runs 'in the browser', so all you need is a server capable of serving static files.
+
+The distribution contains the following files and folders:
+
+* 'console.html' - the HTML page that hosts the interpreter
+* '_app.xap' - the Silverlight application. Rename this file to 'app.xap'
+* 'assets' - folder containing the Javascript, css and images
+* 'app' - folder containing the source files. You don't need to deploy this.
+
+If you just want to deploy the distribution as it is on a server, you can delete the 'app' folder and rename '_app.xap' to 'app.xap'. Then upload the HTML file, 'xap' file and 'assets' folder to your server.
+
+If you want to customize the application, you can modify the source files and then use a tool like 'Chiron' [#]_ to generate a new xap file from the modified sources. See the customizing doc for more details on how it works and which bits do what.

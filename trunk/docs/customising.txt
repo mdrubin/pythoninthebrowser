@@ -1,0 +1,36 @@
+
+.. contents::
+
+"Python in the Browser" is *intended* to be customized and used on your own web pages or for providing live examples as part of tutorials and documentation.
+
+
+The HTML
+========
+
+The simplest way to customize "Python in the Browser" is to embed it in a different web page.
+
+In order for the interpreter textarea and code to operate correctly you will need to retain the following parts:
+
+The Silverlight Control
+-----------------------
+
+The Silverlight control is embedded in a div with the id ``SilverlightControlHost``. You can position or style this div as you like, its only purpose is to display the 'Get Silverlight' badge and link if Silverlight is not installed. You shouldn't rename the element though, as the application hides it once it has successfully loaded.
+
+The Silverlight control itself is embedded and configured by the 'object' element and its contents. You should leave this alone, including the id on the control itself (``SilverlightControl``) which is used by the Javascript to call into IronPython code. The one thing you can change is the application name (``<param name="source" value="app.xap"/>``), but if you change the name here you will need to provide the appropriate xap file or development folder.
+
+There is a debugging div used by Silverlight to report errors (and configured in the Silverlight object parameters). This is the line:
+
+    ``<div id='errorLocation' style="font-size: small;color: Gray;"></div>``
+    
+You should leave this element in the document, although you can move it. Only mess with it if you know what you are doing.
+
+
+The Interpreter Textarea
+------------------------
+
+I've structured the textarea used 
+
+The Development Tools
+=====================
+
+Silverlight 2 applications don't work when viewed directly from the filesystem. 

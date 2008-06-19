@@ -1,0 +1,3 @@
+
+"Python in the Browser" is an interactive Python interpreter that runs inside an HTML textarea. It uses Silverlight 2, and IronPython, and is aimed at providing live examples for tutorials and documentation.
+
