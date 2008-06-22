@@ -1,8 +1,12 @@
 The source code for "Python in the Browser" (HTML, Javascript, C# and Python code etc) is copyright Michael Foord 2007-2008.
 
-You are free to use, modify and distribute it subject to the terms of the New BSD license. See: http://www.voidspace.org.uk/python/license.shtml
+You are free to use, modify and distribute it subject to the terms of the New BSD license. 
 
-The 'app.xap' Silverlight application contains IronPython assemblies that are copyright Microsoft (additionally some of the css files and the image are copyright Microsoft). These are all open source and free to distribute under the terms of the Ms-PL license. See: http://www.codeplex.com/IronPython/license
+See: http://www.voidspace.org.uk/python/license.shtml
+
+The 'app.xap' Silverlight application contains IronPython assemblies that are copyright Microsoft (additionally some of the css files and the image are copyright Microsoft). These are all open source and free to distribute under the terms of the Ms-PL license. 
+
+See: http://www.codeplex.com/IronPython/license
 
 
 

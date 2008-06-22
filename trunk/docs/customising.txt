@@ -9,7 +9,8 @@ The HTML
 
 The simplest way to customize "Python in the Browser" is to embed it in a different web page.
 
-In order for the interpreter textarea and code to operate correctly you will need to retain the following parts:
+In order for the interpreter textarea and code to operate correctly you will need to retain the following parts (perhaps modifying `the example links`_ if you want to provide different examples):
+
 
 The Silverlight Control
 -----------------------
@@ -28,7 +29,36 @@ You should leave this element in the document, although you can move it. Only me
 The Interpreter Textarea
 ------------------------
 
-I've structured the textarea used 
+The textarea used for the interactive interpreter has an id of ``interpreter`` and is contained in a div with the id of ``interpreterhost``.
+
+You can place this whole block wherever you want, but the only thing you should modify is the default text shown when the page loads: ``Python in the browser starting (requires Silverlight 2 Beta 2)..``...
+
+
+The Javascript and CSS Files
+----------------------------
+
+The head block of the page includes several Javascript and CSS files used by the interpreter. Makes sure you include all of them in your page:
+
+* onkeypress.js - used to call into IronPython for every keypress, except keys like cursor movements
+* cursor_pos.js - used to report the selection start and end in the interpreter textarea
+* error.js - used by Silverlight for reporting Python errors
+* error.css - used by Silverlight for reporting Python errors
+
+
+The Example Links
+-----------------
+
+This is one part of the HTML layout that you may want to customize, but you will have to also customize the corresponding part of ``app.py``.
+
+The links to the examples are contained in a div with the id ``examples``. You can remove the examples simply by removing this whole block.
+
+The Python code attaches event handlers to respond to the three links. These have ids of ``example1``, ``example2`` and ``example3``.
+
+
+The Python Code
+===============
+
+
 
 The Development Tools
 =====================
