@@ -63,4 +63,6 @@ The Python Code
 The Development Tools
 =====================
 
-Silverlight 2 applications don't work when viewed directly from the filesystem. 
+Silverlight 2 applications don't work when viewed directly from the filesystem. You can either serve them from a server running locally, or even better use the ``Chiron`` development tool that comes with the `Dynamic Silverlight SDK <>`_. This will dynamically package the xap file from the 'app' folder - allowing you to make changes to the Python code and refresh the browser to see the changes.
+
+Chiron works with Mono on the Mac.
