@@ -52,7 +52,7 @@ This is one part of the HTML layout that you may want to customize, but you will
 
 The links to the examples are contained in a div with the id ``examples``. You can remove the examples simply by removing this whole block.
 
-The Python code attaches event handlers to respond to the three links. These have ids of ``example1``, ``example2`` and ``example3``.
+The Python code attaches event handlers to respond to the three links. These have ids of ``example1``, ``example2`` and ``example3``. These ids are used by the Python code and so if you change them in the HTML you also need to change the code that uses them.
 
 
 The Python Code
