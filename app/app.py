@@ -194,7 +194,7 @@ def example2(*_):
     HtmlPage.Document.example_output.SetStyleAttribute('visible', 'true')
     HtmlPage.Document.example_output.innerHTML = '<p>Type the following:</p>' + code2_html
     
-# Setup examples
+    
 if hasattr(HtmlPage.Document, 'examples'):
     HtmlPage.Document.restore.AttachEvent('onclick', EventHandler(restore))
     HtmlPage.Document.example1.AttachEvent('onclick', EventHandler(example1))

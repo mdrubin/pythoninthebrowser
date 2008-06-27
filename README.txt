@@ -4,6 +4,6 @@
 See the 'docs' directory for the licenses and instructions on how to deploy and customize the project.
 
 The project homepage is: http://code.google.com/p/pythoninthebrowser/
-You can see an online demo at: http://www.voidspace.org.uk/ironpython/silverlight-console/console.html
+You can see an online demo at: http://www.trypython.org/
 
 Using "Python in Your Browser" requires Silverlight 2 Beta 2 to be installed.

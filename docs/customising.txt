@@ -1,7 +1,9 @@
 
 .. contents::
 
-"Python in the Browser" is *intended* to be customized and used on your own web pages or for providing live examples as part of tutorials and documentation.
+.. note::
+
+    "Python in the Browser" is *intended* to be customized and used on your own web pages or for providing live examples as part of tutorials and documentation. It is released under the `BSD Open SOurce License <http://www.voidspace.org.uk/python/license.shtml>`_ and you are free to use and modify it as you wish.
 
 
 The HTML
@@ -31,7 +33,7 @@ The Interpreter Textarea
 
 The textarea used for the interactive interpreter has an id of ``interpreter`` and is contained in a div with the id of ``interpreterhost``.
 
-You can place this whole block wherever you want, but the only thing you should modify is the default text shown when the page loads: ``Python in the browser starting (requires Silverlight 2 Beta 2)..``...
+You can place this whole block wherever you want, but the only thing you should modify is the default text shown when the page loads: ``Python in the browser starting (requires Silverlight 2 Beta 2)...``.
 
 
 The Javascript and CSS Files
@@ -58,11 +60,89 @@ The Python code attaches event handlers to respond to the three links. These hav
 The Python Code
 ===============
 
+The Python code for "Python in Your Browser" is surprisingly simple. There are only about 130 lines *plus* the code for the simple examples.
+
+The most important customizations you are likely to want to make are as follows.
+
+
+Customizing the Interpreter Environment
+---------------------------------------
+
+The dictionary ``context`` defines the environment available to the interpreter. It is copied every time the interpeter is reset, so that changes to the context don't persist.
+
+::
+
+    context = {
+        "__name__": "__console__", 
+        "__doc__": doc,
+        "__version__": __version__,
+        "reset": reset,
+        "gohome": gohome
+    }
+
+The examples put extra relevant items into this context.
+
+If you want to use "Python in the Browser" to provide examples for a Python module, you will need to include the module (and its dependencies) in the Silverlight application - the 'xap' file. For more details on how to package a Silverlight application see `An IronPython Silverlight Application <http://www.voidspace.org.uk/ironpython/silverlight/silverlight_application.shtml>`_.
+
+
+Removing, Adding or Changing Examples
+-------------------------------------
+
+The code that adds the examples first checks for the existence of an ``examples`` element. The easiest way to disable the examples is to remove this element!
+
+To modify the examples, look at all the code below the comment ``# Setup examples`` - it is really very simple.
+
+Each example has three steps:
+
+* An HTML literal to put into the page when the example is displayed. I generated mine with `ToHTML Online Syntax Highlighting <http://tohtml.com/python>`_.
+* A string to set into the interpreter showing what lines of code have already been executed (including the appropriate prompts).
+* A function to reset the interpreter. 
+
+    This function must put anything it needs into a copy of the context and call ``console = Console(new_locals)``, where ``console`` is a global in my current implementation and ``new_locals`` is an augmented copy of ``context``.
+    
+    It must set the banner and any lines of code that have been executed in the interpreter textarea.
+    
+    It should set the HTML of the example into the ``example_output`` element.
+
+This function should then be set as the event handler on the corresponding link. This is done with code that looks like: ::
+
+    handler =  EventHandler(example1_function)
+    example1_link = HtmlPage.Document.example1
+    example1_link.AttachEvent('onclick', handler)
+
+A set of functions to automate the first two steps (generating marked up HTML )
 
 
 The Development Tools
 =====================
 
-Silverlight 2 applications don't work when viewed directly from the filesystem. You can either serve them from a server running locally, or even better use the ``Chiron`` development tool that comes with the `Dynamic Silverlight SDK <>`_. This will dynamically package the xap file from the 'app' folder - allowing you to make changes to the Python code and refresh the browser to see the changes.
+Silverlight 2 applications don't work when viewed directly from the filesystem. You can either serve them from a server running locally, or even better use the ``Chiron`` development tool that comes with the `Dynamic Silverlight SDK <http://www.codeplex.com/sdlsdk>`_ [#]_. This will dynamically package the xap file from the 'app' folder - allowing you to make changes to the Python code and refresh the browser to see the changes.
 
 Chiron works with Mono on the Mac.
+
+You can find out more about developing with IronPython for Silverlight at: `IronPython & Silverlight Articles <>`_
+
+These articles also give details of the Silverlight application packaging ('xap' files)
+
+
+Limitations
+===========
+
+All the basic functionality of "Python in the Browser" works fine. There are a few limitations and improvements that could all be solved by a more sophisticated implementation.
+
+The ones I am aware of are all listed in the `Issues Section of the Project Home <http://code.google.com/p/pythoninthebrowser/issues/list>`_.
+
+If you find bugs or have any feature requests then *preferably* submit a patch, otherwise add it to the issues page.
+
+
+Try Python Tutorial
+===================
+
+One of my goals in this project is to create a Python tutorial, for learning Python, that runs entirely in the browser. This will be located at:
+
+* `www.trypython.org <http://www.trypython.org/>`_
+
+If you would like to help me with this, then please `get in touch <fuzzyman@voidspace.org.uk>`_.
+
+
+.. [#] Assemblies for Silverlight, along with Chiron, also come with IronPython 2 downloaded from the `IronPython Homepage <http://www.codeplex.com/IronPython>`_.
