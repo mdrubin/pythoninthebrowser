@@ -1,10 +1,11 @@
 <html>
     <head>
-        <title>Python in the Browser: an IronPython and Silverlight 2 Interactive Interpreter</title>
+        <title>Try Python in the Browser: an IronPython and Silverlight 2 Interactive Interpreter</title>
         <style type="text/css">
           body { font-size: 1.25em; font-family: verdana;}
           #interpreterhost {
             font-family: monospace;
+            margin: 20px;
           }
           #interpreter {
             font-size: 1em;
@@ -24,9 +25,10 @@
     </head>
 
     <body>
-        <h1>Python in the Browser: an IronPython and Silverlight 2 Interactive Interpreter</h1>
+        <h1>Try Python in the Browser: an IronPython and Silverlight 2 Interactive Interpreter</h1>
       <ul>
-          <li><a href="http://code.google.com/p/pythoninthebrowser/">Python in the Browser Project Page</a></li>
+          <li><a href="http://www.trypython.org">Try Python in the Browser</a></li>
+          <li><a href="http://code.google.com/p/pythoninthebrowser/">Project Home Page</a></li>
           <li>Written by <a href="http://www.voidspace.org.uk/python/weblog/index.shtml">Michael Foord</a></li>
           <li><a href="http://www.ironpythoninaction.com/">IronPython in Action</a></li>
       </ul>
@@ -36,7 +38,7 @@
             <div  id="example_output" style="visible: false;">&nbsp;</div>
         </div>
             
-        <div id="interpreterhost" style="margin: 20px;">
+        <div id="interpreterhost">
           <textarea id="interpreter" onkeydown="return KeyPress(event);" cols="60" rows="15" 
            oncontextmenu="return false;" disabled="true">Python in the browser starting (requires Silverlight 2 Beta 2)...</textarea>
           <!--
