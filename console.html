@@ -40,7 +40,7 @@
             
         <div id="interpreterhost">
           <textarea id="interpreter" onkeydown="return KeyPress(event);" cols="60" rows="15" 
-           oncontextmenu="return false;" disabled="true">Python in the browser starting (requires Silverlight 2 Beta 2)...</textarea>
+           oncontextmenu="return false;" disabled="true">Python in the browser starting (requires Silverlight 2)...</textarea>
           <!--
           <div><span id="debugging">&nbsp;</span>&nbsp;<span id="debugging2">&nbsp;</span>&nbsp;<span id="debugging3">&nbsp;</span></div>
           -->
@@ -54,7 +54,7 @@
 
         <div id="SilverlightControlHost" width="200" height="240" style="float: right;">
 
-          <object id="SilverlightControl" data="data:application/x-silverlight," type="application/x-silverlight-2-b2" width="200" height="200">
+          <object id="SilverlightControl" data="data:application/x-silverlight," type="application/x-silverlight-2" width="200" height="200">
             <param name="source" value="app.xap"/>
             <param name="onerror" value="onSilverlightError" />
             <param name="background" value="white" />
@@ -75,7 +75,7 @@
 
             <p>This is ideal for tutorials and documentation, where example Python code can actually be tried in the browser.</p>
 
-            <p>It requires Silverlight 2 Beta 2, and the Python version is 2.5.</p>
+            <p>It requires Silverlight 2, and the Python version is 2.5.</p>
 
             <p>The interpreter runs in an HTML textarea, with Javascript that communicates with Silverlight and prevents you deleting text from the console except after the interactive prompt.</p>
 

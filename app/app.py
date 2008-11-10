@@ -15,7 +15,7 @@ from System.Windows.Controls import Canvas
 
 from code import InteractiveConsole
 
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 doc = "Python in the browser: version %s" % __version__
 banner = ("Python %s on Silverlight\nPython in the Browser %s by Michael Foord\n" 
           "Type reset() to clear the console and gohome() to exit.\n" % (sys.version, __version__))
